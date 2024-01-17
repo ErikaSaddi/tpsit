@@ -12,10 +12,11 @@
         let count = 1;
         let interval = setInterval(function() {
             if (count <= 5) {
-                document.getElementById("counter").innerHTML = count;
+                document.getElementById("counter").innerHTML = "Contatore: " + count;
                 count++;
             } else {
                 clearInterval(interval);
+                document.getElementById("tabelline").innerHTML = "<p>Qua c'è la tabellina dall'1 al 10:</p>";
                 for (let j = 1; j <= 10; j++) {
                     let table = "<table>";
                     for (let i = 1; i <= 10; i++) {
