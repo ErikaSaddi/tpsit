@@ -1,1 +1,79 @@
+<DOCTYPE html>
+<html lang="en">
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creazione Div Dinamica</title>
+    <style>
+        .custom-div {
+            width: 10px;
+            height: 10px;
+            border: 1px solid black;
+            display: inline-block;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<label for="numeroDiv">Inserisci un numero:</label>
+<input type="number" id="numeroDiv" min="1" value="1">
+<button onclick="creaDiv()">Crea Div</button>
+
+<script>
+    function creaDiv() {
+        var numeroDiv = document.getElementById("numeroDiv").value;
+        var container = document.body; 
+
+        for (var i = 0; i < numeroDiv; i++) {
+            var nuovoDiv = document.createElement("div");
+            nuovoDiv.className = "custom-div";
+            nuovoDiv.style.backgroundColor = getRandomColor();
+            container.appendChild(nuovoDiv);
+        }
+    }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>
+
+</body>
+</html>
+head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .square {
+            width: 10px;
+            height: 10px;
+            background-color: #3498db; 
+            border: 1px solid #000; 
+            margin: 5px; 
+            display: inline-block;
+        }
+    </style>
+    <title>Colored Squares</title>
+</head>
+<body>
+    <!-- Creating 10 colored squares -->
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+</body>
+</html>
 
