@@ -61,22 +61,5 @@ altro
     </style>
     <title>Quadrati 10x10</title>
 </head>
-<body>
-
-<table>
-    <?php
-    $counter = 1;
-    for ($row = 1; $row <= 10; $row++) {
-        echo '<tr>';
-        for ($col = 1; $col <= 10; $col++) {
-            echo '<td class="' . ($counter % 2 === 0 ? 'even' : 'odd') . '"></td>';
-            $counter++;
-        }
-        echo '</tr>';
-    }
-    ?>
-</table>
-
-</body>
 </html>
 
