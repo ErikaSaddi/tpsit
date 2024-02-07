@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertitore voti</title>
+</head>
+<body>
+    <h1>Convertitore voti</h1>
+    <label for="voto">Inserisci un voto in decimi:</label>
+    <input type="number" id="voto" step="0.1" required>
+    <button onclick="converteVoto()">Converti voto</button>
+    <p id="risultato"></p>
+
+    <h2>Inserisci 5 voti</h2>
+    <form onsubmit="event.preventDefault(); aggiungiVoto()">
+        <label for="votoDaAggiungere">Inserisci un voto in decimi:</label>
+        <input type="number" id="votoDaAggiungere" step="0.1" required>
+        <button type="submit">Aggiungi voto</button>
+    </form>
+    <p id="risultatoVoti"></p>
+
+    <script>
+        const voti = [];
+
+        function aggiungiVoto() {
+            const voto = parseFloat(document.getElementById("votoDaAggiungere").value);
+            voti.push(voto);
+            visualizzaVoti();
+        }
+
+        function visualizzaVoti() {
+            document.getElementById("risultatoVoti").innerHTML = "Voti inseriti: " + voti.join(", ");
+        }
+
+        function converteVoto() {
+            const voto = parseFloat(document.getElementById("voto").value);
+            const votoInTrentesimi = voto * 3;
+            document.getElementById("risultato").innerHTML = `Il voto in trentesimi è: ${votoInTrentesimi.toFixed(2)}`;
+        }
+
+        function minimo() {
+            let minimoVoto = voti[0];
+            for (let i = 1; i < voti.length; i++) {
+                if (voti[i] < minimoVoto) {
+                    minimoVoto = voti[i];
+                }
+            }
+            return minimoVoto;
+        }
+    </script>
+</body>
+</html>
