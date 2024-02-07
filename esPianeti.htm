@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore peso su pianeti</title>
+</head>
+<body>
+    <h1>Calcolatore peso su pianeti</h1>
+    <label for="peso">Inserisci il tuo peso (kg):</label>
+    <input type="number" id="peso" required>
+    <br>
+    <label for="pianeta">Seleziona il pianeta:</label>
+    <select id="pianeta">
+        <option value="0.37">Marte</option>
+        <option value="0.166">Mercurio</option>
+        <option value="0.917">Venere</option>
+        <option value="0.386">Terra</option>
+        <option value="0.006">Luna</option>
+        <option value="2.55">Giove</option>
+        <option value="0.000006">Nettuno</option>
+    </select>
+    <br>
+    <button onclick="calcolaPeso()">Calcola peso</button>
+    <p id="risultato"></p>
+
+    <script>
+        function calcolaPeso() {
+            const peso = parseFloat(document.getElementById("peso").value);
+            const accelerazioneGravita = parseFloat(document.getElementById("pianeta").value);
+
+            const pianeti = [
+                { nome: "Marte", accelerazioneGravita: 0.37 },
+                { nome: "Mercurio", accelerazioneGravita: 0.166 },
+                { nome: "Venere", accelerazioneGravita: 0.917 },
+                { nome: "Terra", accelerazioneGravita: 0.386 },
+                { nome: "Luna", accelerazioneGravita: 0.006 },
+                { nome: "Giove", accelerazioneGravita: 2.55 },
+                { nome: "Nettuno", accelerazioneGravita: 0.000006 }
+            ];
+
+            const pesoSuPianeta = peso * (accelerazioneGravita / 0.386);
+
+            document.getElementById("risultato").innerHTML = `Il tuo peso su ${document.getElementById("pianeta").options[document.getElementById("pianeta").selectedIndex].text} è di ${pesoSuPianeta.toFixed(2)} kg.`;
+        }
+    </script>
+</body>
+</html>
