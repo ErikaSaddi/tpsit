@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calcolatore Area Cerchio</title>
+<style>
+  .square {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    margin: 5px;
+    float: left;
+  }
+</style>
+</head>
+<body>
+<h2>Calcolatore Area Cerchio</h2>
+<div>
+  <label for="raggio">Inserisci il raggio del cerchio:</label>
+  <input type="number" id="raggio">
+</div>
+<button onclick="calcolaArea()">Calcola L'Area</button>
+<div id="risultato"></div>
+
+<script>
+function calcolaArea() {
+  var raggio = parseFloat(document.getElementById('raggio').value);
+  var area = Math.PI * raggio * raggio;
+ 
+  var risultatoHTML = 
