@@ -3,52 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ordina Drink</title>
+    <title>Document</title>
 </head>
 <body>
-    <button onclick="ordinaDrink()">Ordina Drink</button>
+    <p id="demo"></p>
+    <p id="carrello"></p>
+    <button id="bottone-add" onclick="aggiungiDrink()">Aggiungi drink</button>
+    <button id="bottone-remove" onclick="cancellaDrink()">Cancella drink</button>
+    <button id="bottone-count" onclick="contaDrink()">Conta drink</button>
+    <button id="bottone-order" onclick="ordinaDrink()">Ordina drink</button>
 
-    <script>
-        function ordinaDrink() {
-            // Richiesta di autorizzazione per ottenere la posizione dell'utente
-            navigator.geolocation.getCurrentPosition(function(position) {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
+    <p>Numero drink a menu : </p>
+    <p id="contaDrink"></p>
 
-                // Invio delle coordinate al backend per gestire l'ordine
-                inviaOrdine(lat, lon);
-            }, function(error) {
-                console.error('Errore nell\'ottenere la posizione:', error);
-            });
-        }
+<script>
+   const drinks=["coca cola,"," spritz,"," sprite,"," fanta,"," birra,"," belvedere,"," martini"];
+   const carrello = [];
+   document.getElementById("demo").innerHTML = drinks.join(" ")+" #drinks: "+drinks.length;
 
-        function inviaOrdine(lat, lon) {
-            // Invia le coordinate al backend per elaborare l'ordine
-            const ordine = {
-                drink: "Nome del Drink",
-                latitudine: lat,
-                longitudine: lon
-            };
+   function contaDrink(){
+    let length = drinks.length;
+    document.getElementById("contaDrink").innerHTML = drinks.length;
+   }
 
-            // Effettua una richiesta HTTP POST al backend
-            fetch('/api/ordinaDrink', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(ordine)
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Ordine inviato con successo!');
-                } else {
-                    console.error('Errore durante l\'invio dell\'ordine.');
-                }
-            })
-            .catch(error => {
-                console.error('Si è verificato un errore:', error);
-            });
-        }
-    </script>
+   function aggiungiDrink(){
+    let drink = prompt("Inserisci il tuo drink:");
+    if(drink) {
+      drinks.push(drink);
+      document.getElementById("demo").innerHTML = drinks.join(" ");
+    }
+   }
+
+   function cancellaDrink(){
+    let drink = drinks.pop();
+    document.getElementById("demo").innerHTML = drinks.join(" ");
+   }
+
+   function ordinaDrink(){
+    let drinkDaordinare = prompt("Inserisci il numero del drink da ordinare (0 - " + (drinks.length - 1) + "):");
+    if (drinkDaordinare >= 0 && drinkDaordinare < drinks.length) {
+      carrello.push(drinks[drinkDaordinare]);
+      document.getElementById("carrello").innerHTML = "Carrello: " + carrello.join(", ");
+    } else {
+      alert("Numero del drink non valido.");
+    }
+   }
+</script>
+
 </body>
 </html>
