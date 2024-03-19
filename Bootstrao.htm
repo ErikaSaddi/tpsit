@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow e Testo Responsive</title>
+    <style>
+      .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+        overflow: hidden;
+      }
+
+      .slideshow-container img {
+        width: 100%;
+        height: auto;
+      }
+
+      /* Stile per il testo responsive */
+      .columns {
+        float: left;
+        width: 33.33%;
+        padding: 8px;
+      }
+
+      /* Stile per la pulizia del float */
+      .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+    </style>
+</head>
+<body>
+    <!-- Slideshow -->
+    <div class="slideshow-container">
+      <img src="immagine1.jpg" alt="Immagine 1">
+      <img src="immagine2.jpg" alt="Immagine 2">
+      <img src="immagine3.jpg" alt="Immagine 3">
+    </div>
+
+    <!-- Testo responsive -->
+    <div class="clearfix">
+      <div class="columns">
+        <h2>Blocco 1</h2>
+        <p>Testo del blocco 1.</p>
+      </div>
+      <div class="columns">
+        <h2>Blocco 2</h2>
+        <p>Testo del blocco 2.</p>
+      </div>
+      <div class="columns">
+        <h2>Blocco 3</h2>
+        <p>Testo del blocco 3.</p>
+      </div>
+    </div>
+
+    <script>
+      let slideIndex = 0;
+      carousel();
+
+      function carousel() {
+        let i;
+        const slides = document.getElementsByClassName("slideshow-container")[0].getElementsByTagName("img");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(carousel, 2000); // Cambia immagine ogni 2 secondi
+      }
+    </script>
+</body>
+</html>
