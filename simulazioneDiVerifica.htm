@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di Frasi</title>
+    <style>
+        button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <button id="aggiungiSoggetto">Aggiungi Soggetto</button>
+    <button id="aggiungiVerbo">Aggiungi Verbo</button>
+    <button id="aggiungiComplemento">Aggiungi Complemento</button>
+    <br>
+    <button id="creaFrase">Crea Frase</button>
+    <br>
+    <div id="output"></div>
+
+    <script>
+        let soggetti = [];
+        let verbi = [];
+        let complementi = [];
+
+        function stampaArray() {
+            document.getElementById("output").innerHTML = `
+                <p>Soggetti: ${soggetti.join(', ')}</p>
+                <p>Verbi: ${verbi.join(', ')}</p>
+                <p>Complementi: ${complementi.join(', ')}</p>
+            `;
+        }
+
+        document.getElementById("aggiungiSoggetto").addEventListener("click", function() {
+            let soggetto = prompt("Inserisci un soggetto:");
+            if (soggetto) {
+                soggetti.push(soggetto);
+                stampaArray();
+            }
+        });
+
+        document.getElementById("aggiungiVerbo").addEventListener("click", function() {
+            let verbo = prompt("Inserisci un verbo:");
+            if (verbo) {
+                verbi.push(verbo);
+                stampaArray();
+            }
+        });
+
+        document.getElementById("aggiungiComplemento").addEventListener("click", function() {
+            let complemento = prompt("Inserisci un complemento:");
+            if (complemento) {
+                complementi.push(complemento);
+                stampaArray();
+            }
+        });
+
+        document.getElementById("creaFrase").addEventListener("click", function() {
+            if (soggetti.length === 0 || verbi.length === 0 || complementi.length === 0) {
+                alert("Inserisci almeno un elemento in ogni categoria.");
+                return;
+            }
+
+            let soggetto = soggetti[Math.floor(Math.random() * soggetti.length)];
+            let verbo = verbi[Math.floor(Math.random() * verbi.length)];
+            let complemento = complementi[Math.floor(Math.random() * complementi.length)];
+
+            document.getElementById("output").innerHTML += `<p>Frase: ${soggetto} ${verbo} ${complemento}</p>`;
+        });
+    </script>
+</body>
+</html>
