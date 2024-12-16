@@ -7,46 +7,98 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f4f4f4;
     }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
     button {
       padding: 10px;
       margin: 5px;
       font-size: 16px;
+      cursor: pointer;
     }
+
     .active {
       background-color: #4CAF50;
       color: white;
+    }
+
+    select, input {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+    }
+
+    #estrazioni {
+      margin-top: 20px;
+      text-align: left;
+      max-height: 200px;
+      overflow-y: auto;
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .export-buttons {
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-  <h1>Gioco Roulette Numerica</h1>
-  
-  <div>
-    <button id="pariButton">Pari</button>
-    <button id="dispariButton">Dispari</button>
-    <select id="decinaSelect">
-      <option value="0">1-10</option>
-      <option value="1">11-20</option>
-      <option value="2">21-30</option>
-      <option value="3">31-40</option>
-      <option value="4">41-50</option>
-      <option value="5">51-60</option>
-      <option value="6">61-70</option>
-      <option value="7">71-80</option>
-      <option value="8">81-90</option>
-    </select>
-    <label for="puntataFissa">Puntata fissa:</label>
-    <input type="number" id="puntataFissa" value="20" min="1" max="90">
-  </div>
+  <div class="container">
+    <h1>Gioco Roulette Numerica</h1>
+    
+    <div>
+      <button id="pariButton">Pari</button>
+      <button id="dispariButton">Dispari</button>
+      <br>
+      <select id="decinaSelect">
+        <option value="0">1-10</option>
+        <option value="1">11-20</option>
+        <option value="2">21-30</option>
+        <option value="3">31-40</option>
+        <option value="4">41-50</option>
+        <option value="5">51-60</option>
+        <option value="6">61-70</option>
+        <option value="7">71-80</option>
+        <option value="8">81-90</option>
+      </select>
+      <br>
+      <label for="puntataFissa">Puntata fissa:</label>
+      <input type="number" id="puntataFissa" value="20" min="1" max="90">
+    </div>
 
-  <button id="startButton">Inizia il Gioco</button>
-  
-  <div id="estrazioni"></div>
-  
-  <div id="result"></div>
+    <br>
+    <button id="startButton">Inizia il Gioco</button>
+    
+    <div id="estrazioni"></div>
+    
+    <div id="result"></div>
+
+    <div class="export-buttons">
+      <button id="exportCSV">Esporta in CSV</button>
+      <button id="exportJSON">Esporta in JSON</button>
+    </div>
+  </div>
 
   <script>
     let pari = false;
@@ -109,6 +161,31 @@
       }
     }
 
+    // Funzione per esportare in formato CSV
+    function esportaCSV() {
+      const header = ['Estrazione'];
+      const rows = estrazioni.map(num => [num]);
+
+      const csvContent = [header, ...rows].map(row => row.join(',')).join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'estrazioni.csv';
+      link.click();
+    }
+
+    // Funzione per esportare in formato JSON
+    function esportaJSON() {
+      const jsonContent = JSON.stringify(estrazioni, null, 2);
+      const blob = new Blob([jsonContent], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'estrazioni.json';
+      link.click();
+    }
+
     // Event listeners per i bottoni
     document.getElementById('pariButton').addEventListener('click', function () {
       toggleButton('pariButton');
@@ -128,6 +205,14 @@
 
     document.getElementById('startButton').addEventListener('click', function () {
       iniziaGioco();
+    });
+
+    document.getElementById('exportCSV').addEventListener('click', function () {
+      esportaCSV();
+    });
+
+    document.getElementById('exportJSON').addEventListener('click', function () {
+      esportaJSON();
     });
   </script>
 
