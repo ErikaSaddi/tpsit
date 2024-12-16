@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulazione Estrazioni</title>
+  <title>Gioco Roulette Numerica</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -22,7 +22,7 @@
 </head>
 <body>
 
-  <h1>Simulazione Estrazioni</h1>
+  <h1>Gioco Roulette Numerica</h1>
   
   <div>
     <button id="pariButton">Pari</button>
@@ -42,7 +42,7 @@
     <input type="number" id="puntataFissa" value="20" min="1" max="90">
   </div>
 
-  <button id="startButton">Inizia Simulazione</button>
+  <button id="startButton">Inizia il Gioco</button>
   
   <div id="estrazioni"></div>
   
@@ -57,7 +57,7 @@
     let numVincite = 0;
     let numEstratti = 0;
 
-    // Funzione per generare un numero casuale tra 1 e 90
+    // Funzione per generare un numero casuale tra 1 e 90 (simulando una ruota della roulette)
     function estrazioneCasuale() {
       return Math.floor(Math.random() * 90) + 1;
     }
@@ -71,8 +71,8 @@
       return false;
     }
 
-    // Funzione per iniziare la simulazione
-    function iniziaSimulazione() {
+    // Funzione per iniziare il gioco
+    function iniziaGioco() {
       estrazioni = [];
       numVincite = 0;
       numEstratti = 0;
@@ -127,7 +127,7 @@
     });
 
     document.getElementById('startButton').addEventListener('click', function () {
-      iniziaSimulazione();
+      iniziaGioco();
     });
   </script>
 
